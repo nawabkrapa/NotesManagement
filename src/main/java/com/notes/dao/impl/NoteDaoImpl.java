@@ -1,12 +1,21 @@
 package com.notes.dao.impl;
 
+import java.util.List;
+
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+
 import com.notes.dao.AbstractDao;
 import com.notes.dao.NoteDao;
+import com.notes.model.Note;
 
-//@Repository("noteDao")
+@Repository("noteDao")
 public class NoteDaoImpl extends AbstractDao implements NoteDao {
 
-	/*@Override
+	@Override
 	public Note findById(long id) {
 		Criteria criteria = getSession().createCriteria(Note.class);
 		criteria.add(Restrictions.eq("id",id));
@@ -17,12 +26,18 @@ public class NoteDaoImpl extends AbstractDao implements NoteDao {
 	public Note findByTitle(String title) {
 		Criteria criteria = getSession().createCriteria(Note.class);
 		criteria.add(Restrictions.eq("noteTitle",title));
-        return (Note) criteria.list().get(0);
+		
+        List result= criteria.list();
+        
+        if(result != null && !result.isEmpty()){
+        	return (Note) result.get(0);
+        }
+        return null;
 	}
 
 	@Override
 	public void saveNote(Note note) {
-		 persist(note);
+		getSession().saveOrUpdate(note);
 	}
 
 	@Override
@@ -32,7 +47,7 @@ public class NoteDaoImpl extends AbstractDao implements NoteDao {
 
 	@Override
 	public void deleteNoteById(long id) {
-		 Query query = getSession().createSQLQuery("delete from Employee where id = :id");
+		 Query query = getSession().createSQLQuery("delete from note where id = :id");
 	        query.setLong("id", id);
 	        query.executeUpdate();
 	}
@@ -54,6 +69,6 @@ public class NoteDaoImpl extends AbstractDao implements NoteDao {
 	public boolean isNoteExist(Note note) {
 		// TODO Auto-generated method stub
 		return false;
-	}*/
+	}
 
 }

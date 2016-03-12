@@ -1,14 +1,14 @@
 package com.notes.service.impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.notes.dao.NoteDao;
+import com.notes.dao.UserDao;
 import com.notes.model.Note;
 import com.notes.service.NoteService;
 
@@ -16,9 +16,12 @@ import com.notes.service.NoteService;
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 public class NoteServiceImpl implements NoteService {
 
-	/*
+	
 	@Autowired
 	private NoteDao dao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public List<Note> findAllNotes() {
@@ -37,6 +40,7 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	public void saveNote(Note note) {
+		note.setEmailId(userDao.findByEmailId("test@test.com"));
 		dao.saveNote(note);
 	}
 
@@ -58,9 +62,9 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public boolean isNoteExist(Note note) {
 		return dao.findByTitle(note.getNoteTitle()) != null;
-	}*/
+	}
 
-	private static final AtomicLong counter = new AtomicLong();
+	/*private static final AtomicLong counter = new AtomicLong();
 	private static List<Note> notes;
 
 	static {
@@ -150,5 +154,5 @@ public class NoteServiceImpl implements NoteService {
 	@Override
 	public boolean isNoteExist(Note note) {
 		return findByTitle(note.getNoteTitle()) != null;
-	}
+	}*/
 }

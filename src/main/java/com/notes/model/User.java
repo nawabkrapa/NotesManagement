@@ -1,42 +1,41 @@
 package com.notes.model;
 
 import java.io.Serializable;
-//
-//@Entity
-//@Table(name = "USER")
-public class User implements Serializable{
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "User")
+public class User  extends AbstractTimestampEntity implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3433482992205687525L;
 
-	/*@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "USER_ID")
 	private int id;
 
 	@Column(name = "EMAIL_ID", nullable = false, unique = true, length = 100)
 	private String emailId;
 
-	@Column(name = "password", nullable = false)
+	@Column(name = "PASSWORD", nullable = false)
 	private String password;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_DATE",nullable=false)
-	private Date createDate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_DATE")
-	private Date updateDate;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "emailId")
     private Set<Note> notes;
 
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getEmailId() {
@@ -54,22 +53,6 @@ public class User implements Serializable{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
 	
 	@Override
 	public int hashCode() {
@@ -78,8 +61,6 @@ public class User implements Serializable{
 		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
-
-	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -98,6 +79,6 @@ public class User implements Serializable{
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", Email Id=" + emailId + "]";
-	}*/
+	}
 
 }

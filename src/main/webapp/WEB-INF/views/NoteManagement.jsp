@@ -40,7 +40,7 @@
                           <div class="form-group col-md-12">
                               <label class="col-md-2 control-lable" for="title">Title</label>
                               <div class="col-md-7">
-                                  <input type="text" ng-model="ctrl.note.noteTitle" id="title" class="title form-control input-sm" placeholder="Enter title" required ng-maxlength="50"/>
+                                  <input type="text" ng-model="ctrl.note.noteTitle" id="title" class="title form-control input-sm" placeholder="Enter title [Required]]" required ng-maxlength="50"/>
                                   <div class="has-error" ng-show="myForm.$dirty">
                                       <span ng-show="myForm.title.$error.required">This is a required field</span>
                                       <span ng-show="myForm.title.$error.maxlength">Maximum 50 characters are allowed</span>
@@ -56,7 +56,10 @@
                               <label class="col-md-2 control-lable" for="address">Address</label>
                               <div class="col-md-7">
                                   <!-- <input type="TEXTAREA" ng-model="ctrl.note.noteBody" id="address" class="form-control input-sm" placeholder="Enter Note Body. [This field is validation free]"/> -->
-                                  <textarea rows="6" cols="100" name="comment" ng-model="ctrl.note.noteBody" class="form-control input-sm" placeholder="Enter Note Body. [This field is validation free]" name="Note Body"></textarea>
+                                  <textarea rows="6" cols="100" name="comment" ng-model="ctrl.note.noteBody" class="form-control input-sm" placeholder="Enter Note Body. [Maximum 1000 characters allowed]" name="Note Body" ng-maxlength="1000"></textarea>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.title.$error.maxlength">Maximum 1000 characters are allowed</span>
+                                  </div>
                               </div>
                           </div>
                       </div>

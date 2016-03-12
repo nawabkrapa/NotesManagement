@@ -5,7 +5,7 @@ import java.util.List;
 import com.notes.model.Note;
 
 public interface NoteDao {
-	/*Note findById(long id);
+	Note findById(long id);
     
 	Note findByTitle(String title);
      
@@ -19,5 +19,5 @@ public interface NoteDao {
      
 	List<Note> findAllNotes();
 
-	boolean isNoteExist(Note note);*/
+	boolean isNoteExist(Note note);
 }

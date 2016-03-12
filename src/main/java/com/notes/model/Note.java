@@ -1,20 +1,41 @@
 package com.notes.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
-//@Entity
-//@Table(name = "NOTE")
-public class Note implements Serializable{
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "NOTE")
+public class Note  extends AbstractTimestampEntity implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -11146023191281816L;
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "NOTE_ID")
 	private long id;
 	
-public Note(long id, String noteTitle, String noteBody, String emailId) {
+	@Column(name = "NOTE_TITLE", nullable = false, unique=true, length=50)
+	private String noteTitle;
+	
+	@Column(name = "NOTE_BODY", nullable = true, length=1000)
+	private String noteBody;
+		
+	@ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name = "EMAIL_ID", referencedColumnName = "EMAIL_ID") 
+	private User emailId;
+
+	public Note(long id, String noteTitle, String noteBody, User emailId) {
 		super();
 		this.id = id;
 		this.noteTitle = noteTitle;
@@ -23,32 +44,8 @@ public Note(long id, String noteTitle, String noteBody, String emailId) {
 //		this.updateDate = updateDate;
 		this.emailId = emailId;
 	}
-
-	//	@Column(name = "NAME", nullable = false, unique=true, length=50)
-	private String noteTitle;
-	
-//	@Column(name = "NOTE_BODY", nullable = true, length=1000)
-	private String noteBody;
-	
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@Column(name = "CREATE_DATE",nullable=false)
-	private Date createDate;
-
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@Column(name = "UPDATE_DATE")
-	private Date updateDate;
-	
-//	@ManyToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "EMAIL_ID", referencedColumnName = "EMAIL_ID") 
-	private String emailId;
-
-
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getNoteTitle() {
@@ -67,6 +64,13 @@ public Note(long id, String noteTitle, String noteBody, String emailId) {
 		this.noteBody = noteBody;
 	}
 
+	public User getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(User emailId) {
+		this.emailId = emailId;
+	}
 	public Note() {
 		super();
 	}
@@ -97,13 +101,5 @@ public Note(long id, String noteTitle, String noteBody, String emailId) {
 	@Override
 	public String toString() {
 		return "Note [id=" + id + ", Title=" + noteTitle + ", NoteBody=" + noteBody + ", Email ID=" + emailId + "]";
-	}
-
-	public String getEmailId() {
-		return emailId;
-	}
-
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
 	}
 }

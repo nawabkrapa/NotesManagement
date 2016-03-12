@@ -1,8 +1,12 @@
 package com.notes.dao;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public abstract class AbstractDao {
 	 
-   /* @Autowired
+    @Autowired
     private SessionFactory sessionFactory;
  
     protected Session getSession() {
@@ -15,5 +19,5 @@ public abstract class AbstractDao {
  
     public void delete(Object entity) {
         getSession().delete(entity);
-    }*/
+    }
 }
